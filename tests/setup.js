@@ -1,7 +1,7 @@
 const mongoose = require('mongoose')
 
-const Task = require('../server/models/Task')
-const { mongoUri, mongoOptions } = require('../server/config')
+const Task = require('../src/models/Task')
+const { mongoUri, mongoOptions } = require('../src/config')
 
 const taskOneId = new mongoose.Types.ObjectId()
 const taskOne = {

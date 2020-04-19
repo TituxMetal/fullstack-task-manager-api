@@ -1,6 +1,6 @@
 const request = require('supertest')
 
-const server = require('../server/app')
+const server = require('../src/app')
 
 describe('Welcome route', () => {
   describe('GET /api/welcome', () => {

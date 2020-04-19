@@ -1,7 +1,7 @@
 const request = require('supertest')
 
-const server = require('../server/app')
-const Task = require('../server/models/Task')
+const server = require('../src/app')
+const Task = require('../src/models/Task')
 const {
   taskOne,
   taskOneId,
