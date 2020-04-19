@@ -1,0 +1,36 @@
+{
+  "author": "Titux Metal <github@lgdweb.fr>",
+  "description": "The api for the fullstack task manager. Build with Express, Mongoose and Joi",
+  "name": "fullstack-task-manager-api",
+  "license": "MIT",
+  "main": "./src/index.js",
+  "version": "1.0.0",
+  "scripts": {
+    "start": "node ./src/index.js",
+    "dev": "env-cmd -f ./dev.env nodemon ./src/index.js",
+    "docker:mongo": "docker run -d --rm --name mongoDev -p 27017:27017 -v /etc/localtime:/etc/localtime:ro -v /etc/timezone:/etc/timezone:ro -v ~/mongoData/data:/data/db mongo:4.2.5",
+    "docker:mongoClean": "docker rm -f mongoDev",
+    "test": "env-cmd -f ./test.env jest --runInBand",
+    "test-coverage": "env-cmd -f ./test.env jest --coverage tests/*test.js"
+  },
+  "dependencies": {
+    "@hapi/joi": "^15.0.1",
+    "express": "^4.17.1",
+    "mongoose": "^5.9.9"
+  },
+  "devDependencies": {
+    "env-cmd": "^10.1.0",
+    "jest": "^25.3.0",
+    "nodemon": "^2.0.3",
+    "supertest": "^4.0.2"
+  },
+  "jest": {
+    "testEnvironment": "node",
+    "coverageDirectory": "./tests/report",
+    "coverageReporters": ["html"]
+  },
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/TituxMetal/fullstack-task-manager-api"
+  }
+}
