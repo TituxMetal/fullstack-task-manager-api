@@ -24,6 +24,8 @@
   },
   "devDependencies": {
     "env-cmd": "^10.1.0",
+    "eslint-config-standard-airbnb-bundle": "^1.0.6",
+    "eslint-import-resolver-alias": "^1.1.2",
     "jest": "^25.3.0",
     "nodemon": "^2.0.3",
     "supertest": "^4.0.2"
@@ -32,7 +34,8 @@
     "testEnvironment": "node",
     "coverageDirectory": "./tests/report",
     "coverageReporters": [
-      "text", "html"
+      "text",
+      "html"
     ]
   },
   "repository": {
