@@ -6,13 +6,14 @@
   "main": "./src/index.js",
   "version": "1.0.0",
   "scripts": {
-    "start": "node ./src/index.js",
     "docker:down": "docker-compose down",
     "docker:stop": "docker-compose stop",
     "docker:up": "mkdir -p .docker/data/{db,log} && docker-compose up -d",
-    "prewatch": "yarn docker:up",
+    "posttest": "yarn docker:down",
+    "prewatch": "yarn docker:up db cache",
+    "start": "node ./src/index.js",
     "test": "env-cmd -f ./test.env jest --runInBand",
-    "test-coverage": "env-cmd -f ./test.env jest --coverage tests/*test.js",
+    "test:coverage": "env-cmd -f ./test.env jest --coverage tests/*test.js",
     "watch": "env-cmd nodemon ./src/index.js"
   },
   "dependencies": {
@@ -31,7 +32,7 @@
     "testEnvironment": "node",
     "coverageDirectory": "./tests/report",
     "coverageReporters": [
-      "html"
+      "text", "html"
     ]
   },
   "repository": {
