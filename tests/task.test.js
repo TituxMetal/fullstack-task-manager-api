@@ -144,7 +144,7 @@ describe('Tasks Routes', () => {
     })
 
     it('should return an empty object if no task found', async () => {
-      const { body } = request(server)
+      const { body } = await request(server)
         .delete(`/api/tasks/${fakeId}`)
         .expect(200)
 
