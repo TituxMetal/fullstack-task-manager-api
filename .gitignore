@@ -1,2 +1,5 @@
+.docker/data
+dist
 *.env
+!env.sample
 node_modules

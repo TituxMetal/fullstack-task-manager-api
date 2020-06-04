@@ -7,11 +7,13 @@
   "version": "1.0.0",
   "scripts": {
     "start": "node ./src/index.js",
-    "dev": "env-cmd -f ./dev.env nodemon ./src/index.js",
-    "docker:mongo": "docker run -d --rm --name mongoDev -p 27017:27017 -v /etc/localtime:/etc/localtime:ro -v /etc/timezone:/etc/timezone:ro -v ~/mongoData/data:/data/db mongo:4.2.5",
-    "docker:mongoClean": "docker rm -f mongoDev",
+    "docker:down": "docker-compose down",
+    "docker:stop": "docker-compose stop",
+    "docker:up": "mkdir -p .docker/data/{db,log} && docker-compose up -d",
+    "prewatch": "yarn docker:up",
     "test": "env-cmd -f ./test.env jest --runInBand",
-    "test-coverage": "env-cmd -f ./test.env jest --coverage tests/*test.js"
+    "test-coverage": "env-cmd -f ./test.env jest --coverage tests/*test.js",
+    "watch": "env-cmd nodemon ./src/index.js"
   },
   "dependencies": {
     "@hapi/joi": "^15.0.1",
