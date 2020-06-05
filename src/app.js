@@ -1,17 +1,15 @@
-const cors = require('cors')
-const express = require('express')
+import express from 'express'
 
-const server = express()
+import tasksRoute from '~/routes/task'
+import welcomeRoute from '~/routes/welcome'
 
-server.use(cors())
-server.use(express.json())
+export const createApp = () => {
+  const app = express()
 
-server.use('/api', require('./routes/welcome'))
-server.use('/api/tasks', require('./routes/task'))
+  app.use(express.json())
 
-server.use((err, _req, res, _next) => {
-  const { status = 500, message } = err
-  res.status(status).json(message)
-})
+  app.use('/api', welcomeRoute)
+  app.use('/api/tasks', tasksRoute)
 
-module.exports = server
+  return app
+}
