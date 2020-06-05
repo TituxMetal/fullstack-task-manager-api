@@ -1,7 +1,22 @@
-const { port } = require('./config')
+import { createApp } from './app'
+import { port } from '~/config'
+import connectDb from '~/database'
+import { localISOTime, shutdownServer } from './utils'
 
-require('./database')()
+const app = createApp()
 
-const server = require('./app')
+app.listen(port, '0.0.0.0', () => {
+  connectDb()
 
-server.listen(port, () => console.log(`Server is running on port: ${port}`))
+  console.info(`Server is listening on http://localhost:${port}`)
+
+  process.on('SIGINT', () => {
+    console.info('Got SIGINT. Graceful shutdown.', localISOTime())
+    shutdownServer(app)
+  })
+
+  process.on('SIGTERM', () => {
+    console.info('Got SIGTERM. Graceful shutdown.', localISOTime())
+    shutdownServer(app)
+  })
+})
