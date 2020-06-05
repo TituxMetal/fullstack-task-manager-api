@@ -1,12 +1,18 @@
-const mongoose = require('mongoose')
+import mongoose from 'mongoose'
 
-const { mongoUri, mongoOptions, isProd } = require('../config')
+import { inProd, mongoOptions, mongoUri } from '~/config'
 
-module.exports = async () => {
+const connectDb = async () => {
   try {
     await mongoose.connect(mongoUri, mongoOptions)
-    !isProd && console.log(`Mongodb connected at ${mongoUri}`)
-  } catch (err) {
-    console.error(err)
+
+    console.info(`
+      Database connected!
+      ${!inProd && mongoUri}
+    `)
+  } catch (error) {
+    console.error(error)
   }
 }
+
+export default connectDb
