@@ -1,6 +1,6 @@
-const mongoose = require('mongoose')
+import { model, Schema } from 'mongoose'
 
-const taskSchema = new mongoose.Schema(
+const taskSchema = new Schema(
   {
     description: { type: String, required: true, unique: true, trim: true },
     completed: { type: Boolean, default: false }
@@ -8,6 +8,4 @@ const taskSchema = new mongoose.Schema(
   { timestamps: true }
 )
 
-const Task = mongoose.model('Task', taskSchema)
-
-module.exports = Task
+export const Task = model('Task', taskSchema)
