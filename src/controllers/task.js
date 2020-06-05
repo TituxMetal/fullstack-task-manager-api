@@ -1,6 +1,6 @@
-const Task = require('../models/Task')
+import { Task } from '~/models'
 
-const getAllTasks = async (_req, res) => {
+export const getAllTasks = async (_req, res) => {
   try {
     const tasks = await Task.find()
 
@@ -10,7 +10,7 @@ const getAllTasks = async (_req, res) => {
   }
 }
 
-const addTask = async ({ value }, res) => {
+export const addTask = async ({ value }, res) => {
   try {
     const foundTask = await Task.find({ description: value.body.description }).countDocuments()
 
@@ -28,7 +28,7 @@ const addTask = async ({ value }, res) => {
   }
 }
 
-const updateTask = async ({ params, value }, res) => {
+export const updateTask = async ({ params, value }, res) => {
   const { description, completed } = value.body
 
   try {
@@ -57,7 +57,7 @@ const updateTask = async ({ params, value }, res) => {
   }
 }
 
-const removeTask = async ({ params }, res) => {
+export const removeTask = async ({ params }, res) => {
   try {
     const task = await Task.findOneAndDelete({ _id: params.id })
 
@@ -66,12 +66,3 @@ const removeTask = async ({ params }, res) => {
     res.status(400).send(e.message)
   }
 }
-
-const TaskController = {
-  getAllTasks,
-  addTask,
-  updateTask,
-  removeTask
-}
-
-module.exports = TaskController
