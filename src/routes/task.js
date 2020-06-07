@@ -1,15 +1,23 @@
-const router = require('express').Router()
+import { addTask, getAllTasks, removeTask, updateTask } from '~/controllers'
+import validateBody from '~/middlewares/validateBody'
+import { Task } from '~/models'
+import { add, edit } from '~/validation'
 
-const TaskController = require('../controllers/task')
-const { add, edit } = require('../validation')
-const validateBody = require('../middlewares/validateBody')
+const taskRoutes = router => {
+  const prefixUri = '/api/tasks/'
 
-router.get('/', TaskController.getAllTasks)
+  router.use((req, _res, next) => {
+    req.taskModel = Task
+    next()
+  })
 
-router.post('/', validateBody(add), TaskController.addTask)
+  router.get(prefixUri, getAllTasks)
 
-router.patch('/:id', validateBody(edit), TaskController.updateTask)
+  router.post(prefixUri, validateBody(add), addTask)
 
-router.delete('/:id', TaskController.removeTask)
+  router.patch(`${prefixUri}:id`, validateBody(edit), updateTask)
 
-module.exports = router
+  router.delete(`${prefixUri}:id`, removeTask)
+}
+
+export default taskRoutes
