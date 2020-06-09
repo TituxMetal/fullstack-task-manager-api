@@ -10,16 +10,16 @@ export const getAllTasks = async (_req, res) => {
   }
 }
 
-export const addTask = async ({ value }, res) => {
+export const addTask = async ({ body }, res) => {
   try {
-    const foundTask = await Task.find({ description: value.body.description }).countDocuments()
+    const foundTask = await Task.find({ description: body.description }).countDocuments()
 
     if (foundTask) {
       const error = JSON.stringify({ errors: { description: 'Task already exists' } })
       throw new Error(error)
     }
 
-    const task = new Task({ ...value.body })
+    const task = new Task({ ...body })
     await task.save()
 
     res.status(201).json(task)
@@ -28,8 +28,8 @@ export const addTask = async ({ value }, res) => {
   }
 }
 
-export const updateTask = async ({ params, value }, res) => {
-  const { description, completed } = value.body
+export const updateTask = async ({ params, body }, res) => {
+  const { description, completed } = body
 
   try {
     const task = await Task.findOne({ _id: params.id })

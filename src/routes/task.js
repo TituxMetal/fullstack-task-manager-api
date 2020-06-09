@@ -1,10 +1,11 @@
 import { addTask, getAllTasks, removeTask, updateTask } from '~/controllers'
-import validateBody from '~/middlewares/validateBody'
+import { requestValidator } from '~/middlewares'
 import { Task } from '~/models'
-import { add, edit } from '~/validation'
+import { tasksValidator } from '~/validation'
 
 const taskRoutes = router => {
   const prefixUri = '/api/tasks/'
+  const { create, edit } = tasksValidator
 
   router.use((req, _res, next) => {
     req.taskModel = Task
@@ -13,9 +14,9 @@ const taskRoutes = router => {
 
   router.get(prefixUri, getAllTasks)
 
-  router.post(prefixUri, validateBody(add), addTask)
+  router.post(prefixUri, requestValidator(create), addTask)
 
-  router.patch(`${prefixUri}:id`, validateBody(edit), updateTask)
+  router.patch(`${prefixUri}:id`, requestValidator(edit), updateTask)
 
   router.delete(`${prefixUri}:id`, removeTask)
 }

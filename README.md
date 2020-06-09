@@ -4,7 +4,7 @@ The api for the fullstack task manager.
 
 ## Api
 
-Built with Express, mongoose, including validation with Joi.
+Built with Express, mongoose, including validation with express-validator.
 
 # Api endpoints
 

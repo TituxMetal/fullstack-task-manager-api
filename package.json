@@ -1,6 +1,6 @@
 {
   "author": "Titux Metal <github@lgdweb.fr>",
-  "description": "The api for the fullstack task manager. Build with Express, Mongoose and Joi",
+  "description": "The api for the fullstack task manager. Build with Express, Mongoose and Express Validator",
   "name": "fullstack-task-manager-api",
   "license": "MIT",
   "main": "./src/index.js",
@@ -18,11 +18,11 @@
     "watch": "env-cmd babel-watch -L src/index.js"
   },
   "dependencies": {
-    "@hapi/joi": "^15.0.1",
     "@lgdweb/common-express-helpers": "^1.0.6",
     "cors": "^2.8.5",
     "express": "^4.17.1",
     "express-async-errors": "^3.1.1",
+    "express-validator": "^6.5.0",
     "mongoose": "^5.9.9"
   },
   "devDependencies": {
