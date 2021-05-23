@@ -1,5 +1,5 @@
 .docker/data
 dist
 *.env
-!env.sample
+!example.env
 node_modules
