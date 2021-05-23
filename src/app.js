@@ -1,4 +1,4 @@
-import { NotFoundError } from '@lgdweb/common-express-helpers'
+import httpError from 'http-errors'
 import express from 'express'
 import 'express-async-errors'
 
@@ -13,9 +13,9 @@ export const createApp = () => {
   taskRoutes(app)
   welcomeRoutes(app)
 
-  app.all('*', async (req, _res) => {
-    throw new NotFoundError(req.path)
-  })
+  app.all('*', async (req, _res, next) =>
+    next(httpError(404, { reason: `${req.path} does not exists` }))
+  )
 
   app.use(errorHandler)
 
