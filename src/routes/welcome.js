@@ -1,7 +1,9 @@
-const welcomeRoutes = router => {
-  router.get('/api/welcome', (_req, res) => {
-    res.json({ message: 'Hello from express server' })
-  })
-}
+import { Router } from 'express'
 
-export default welcomeRoutes
+const router = new Router()
+
+router.get('/welcome', (_req, res) =>
+  res.json({ message: 'Hello from express server' })
+)
+
+export default router

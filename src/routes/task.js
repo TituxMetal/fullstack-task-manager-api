@@ -1,24 +1,23 @@
+import { Router } from 'express'
+
 import { addTask, getAllTasks, removeTask, updateTask } from '~/controllers'
-import { requestValidator } from '~/middlewares'
-import { Task } from '~/models'
-import { tasksValidator } from '~/validation'
 
-const taskRoutes = router => {
-  const prefixUri = '/api/tasks/'
-  const { create, edit } = tasksValidator
+const router = new Router()
 
-  router.use((req, _res, next) => {
-    req.taskModel = Task
-    next()
-  })
+router.get('/', (_req, res) =>
+  res.status(200).json({ message: 'GET /api/tasks' })
+)
 
-  router.get(prefixUri, getAllTasks)
+router.post('/', (_req, res) =>
+  res.status(200).json({ message: 'POST /api/tasks' })
+)
 
-  router.post(prefixUri, requestValidator(create), addTask)
+router.patch('/:id', (_req, res) =>
+  res.status(200).json({ message: 'PATCH /api/tasks' })
+)
 
-  router.patch(`${prefixUri}:id`, requestValidator(edit), updateTask)
+router.delete('/:id', (_req, res) =>
+  res.status(200).json({ message: 'DELETE /api/tasks' })
+)
 
-  router.delete(`${prefixUri}:id`, removeTask)
-}
-
-export default taskRoutes
+export default router
