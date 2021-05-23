@@ -11,8 +11,8 @@ export const createApp = () => {
 
   app.use(express.json())
 
-  taskRoutes(app)
-  welcomeRoutes(app)
+  app.use('/api/tasks', taskRoutes)
+  app.use('/api', welcomeRoutes)
 
   app.all('*', async (req, _res, next) =>
     next(httpError(404, { reason: `${req.path} does not exists` }))
