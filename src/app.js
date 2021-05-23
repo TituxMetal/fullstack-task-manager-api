@@ -1,8 +1,9 @@
-import httpError from 'http-errors'
 import express from 'express'
 import 'express-async-errors'
+import httpError from 'http-errors'
 
-import { errorHandler } from './middlewares'
+import { port } from '~/config'
+import { errorHandler } from '~/middlewares'
 import { taskRoutes, welcomeRoutes } from '~/routes'
 
 export const createApp = () => {
@@ -19,5 +20,9 @@ export const createApp = () => {
 
   app.use(errorHandler)
 
-  return app
+  const server = app.listen(port, '0.0.0.0', () =>
+    console.info(`Server is listening on http://localhost:${port}`)
+  )
+
+  return server
 }
