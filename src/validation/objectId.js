@@ -1,7 +1,8 @@
-import { param } from 'express-validator'
+import { check } from 'express-validator'
 
-const objectIdValidator = [
-  param('id').isMongoId().withMessage('Id parameter must be a valid ObjectId')
-]
+const objectIdValidator = check('id')
+  .isMongoId()
+  .withMessage('Id parameter must be a valid ObjectId.')
+  .bail()
 
 export default objectIdValidator
