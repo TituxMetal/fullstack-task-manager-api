@@ -1,1 +1,1 @@
-export * from './task'
+export { default as tasksController } from './tasks'
