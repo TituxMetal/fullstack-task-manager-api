@@ -1,5 +1,5 @@
-import express from 'express'
 import 'express-async-errors'
+import express from 'express'
 import httpError from 'http-errors'
 
 import { port } from '~/config'
