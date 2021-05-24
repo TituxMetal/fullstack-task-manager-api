@@ -47,7 +47,7 @@ const remove = async ({ params }, res) => {
     data: task
   }
 
-  res.status(200).json(task)
+  res.status(200).json(response)
 }
 
 export default {
