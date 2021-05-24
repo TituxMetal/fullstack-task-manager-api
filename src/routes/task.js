@@ -1,23 +1,15 @@
 import { Router } from 'express'
 
-import { addTask, getAllTasks, removeTask, updateTask } from '~/controllers'
+import { tasksController } from '~/controllers'
 
 const router = new Router()
 
-router.get('/', (_req, res) =>
-  res.status(200).json({ message: 'GET /api/tasks' })
-)
+router.get('/', tasksController.getAll)
 
-router.post('/', (_req, res) =>
-  res.status(200).json({ message: 'POST /api/tasks' })
-)
+router.post('/', tasksController.create)
 
-router.patch('/:id', (_req, res) =>
-  res.status(200).json({ message: 'PATCH /api/tasks' })
-)
+router.patch('/:id', tasksController.update)
 
-router.delete('/:id', (_req, res) =>
-  res.status(200).json({ message: 'DELETE /api/tasks' })
-)
+router.delete('/:id', tasksController.remove)
 
 export default router
