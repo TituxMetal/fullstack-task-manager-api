@@ -8,4 +8,12 @@ const taskSchema = new Schema(
   { timestamps: true }
 )
 
-export const Task = model('Task', taskSchema)
+taskSchema.set('toJSON', {
+  versionKey: false,
+  virtuals: true,
+  transform: (doc, { _id, ...rest }) => rest
+})
+
+const Task = model('Task', taskSchema)
+
+export default Task
