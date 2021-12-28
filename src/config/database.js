@@ -7,8 +7,6 @@ const {
 } = process.env
 
 export const mongoOptions = {
-  useCreateIndex: true,
-  useFindAndModify: false,
   useNewUrlParser: true,
   useUnifiedTopology: true
 }
@@ -17,6 +15,4 @@ const secureConnection = `${MONGODB_USERNAME && MONGODB_USERNAME}${
   MONGODB_PASSWORD && `:${MONGODB_PASSWORD}@`
 }`
 
-export const mongoUri = `mongodb://${secureConnection}${MONGODB_HOST}:${
-  parseInt(MONGODB_PORT, 10)
-}/${MONGODB_DATABASE}`
+export const mongoUri = `mongodb://${secureConnection}${MONGODB_HOST}:${MONGODB_PORT}/${MONGODB_DATABASE}`
