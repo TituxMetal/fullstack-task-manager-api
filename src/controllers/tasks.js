@@ -1,11 +1,10 @@
-import { requestValidator } from '~/middlewares'
+import { requestValidator } from '@lgdweb/common-express-helpers'
+
 import { taskService } from '~/services'
-import { tasksValidator } from '~/validation'
+import { objectIdValidator, tasksValidator } from '~/validation'
 
 const create = async ({ body }, res) => {
-  const { description } = body
-
-  const newTask = await taskService.add({ description })
+  const newTask = await taskService.add(body)
 
   const response = {
     info: 'POST /api/tasks',
@@ -53,6 +52,10 @@ const remove = async ({ params }, res) => {
 export default {
   create: [requestValidator(tasksValidator.create), create],
   getAll,
-  remove: [requestValidator(tasksValidator.remove), remove],
-  update: [requestValidator(tasksValidator.update), update]
+  remove: [requestValidator(objectIdValidator('id')), remove],
+  update: [
+    requestValidator(objectIdValidator('id')),
+    requestValidator(tasksValidator.update),
+    update
+  ]
 }
