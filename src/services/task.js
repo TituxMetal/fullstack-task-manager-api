@@ -1,12 +1,12 @@
-import httpError from 'http-errors'
+import HttpError from 'http-errors'
 
 import { Task } from '~/models'
 
 const add = async ({ description }) => {
   if (await Task.exists({ description })) {
-    const msg = 'One or more fiels already exists.'
+    const message = { msg: 'One or more fiels already exists.' }
 
-    throw httpError(422, { reason: [{ msg }] })
+    throw new HttpError(422, { reason: [message] })
   }
 
   const newTask = await Task.create({ description })
@@ -18,15 +18,15 @@ const all = async () => Task.find()
 
 const update = async (taskId, updatedTask = {}) => {
   if (await Task.exists({ description: updatedTask.description })) {
-    const msg = 'One or more fields already exists.'
+    const message = { msg: 'One or more fields already exists.' }
 
-    throw httpError(422, { reason: [{ msg }] })
+    throw new HttpError(422, { reason: [message] })
   }
 
   const task = await Task.findById(taskId)
 
   if (!task) {
-    throw httpError(404, { reason: 'No task found.' })
+    throw new HttpError(404, { reason: 'No task found.' })
   }
 
   Object.assign(task, { ...updatedTask })
@@ -37,10 +37,10 @@ const update = async (taskId, updatedTask = {}) => {
 }
 
 const remove = async (taskId = '') => {
-  const task = await Task.findOneAndRemove({ _id: taskId })
+  const task = await Task.findByIdAndDelete(taskId)
 
   if (!task) {
-    throw httpError(404, { reason: 'No task found.' })
+    throw new HttpError(404, { reason: 'No task found.' })
   }
 
   return task
