@@ -1,23 +1,7 @@
 {
   "plugins": [
     ["@babel/plugin-transform-runtime"],
-    [
-      "module-resolver",
-      {
-        "alias": {
-          "~": "./src"
-        }
-      }
-    ]
+    ["module-resolver", { "alias": { "~": "./src" } }]
   ],
-  "presets": [
-    [
-      "@babel/preset-env",
-      {
-        "targets": {
-          "node": "current"
-        }
-      }
-    ]
-  ]
+  "presets": [["@babel/preset-env", { "targets": { "node": "current" } }]]
 }
