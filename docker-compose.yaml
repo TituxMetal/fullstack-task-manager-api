@@ -1,10 +1,10 @@
 version: '3'
 
-services: 
+services:
   db:
     container_name: mongo-task-manager
     image: mongo:4.2.6
-    user: $UID
+    user: '1000:1000'
     command: ['--logpath', '/var/log/mongodb/mongod.log']
     env_file:
       - .env
@@ -25,17 +25,3 @@ services:
     ports:
       - '6379:6379'
     command: ['--requirepass "secret"']
-  
-  testDb:
-    container_name: test-mongo-task-manager
-    image: mongo:4.2.6
-    env_file:
-      - test.env
-    environment:
-      MONGO_INITDB_DATABASE: ${MONGODB_DATABASE}
-      MONGO_INITDB_ROOT_PASSWORD: ${MONGO_INITDB_ROOT_PASSWORD}
-      MONGO_INITDB_ROOT_USERNAME: ${MONGO_INITDB_ROOT_USERNAME}
-    ports:
-      - '27018:27017'
-    volumes:
-      - ./.docker/mongo-init.sh:/docker-entrypoint-initdb.d/mongo-init.sh:ro
