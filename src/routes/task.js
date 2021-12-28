@@ -8,7 +8,7 @@ router.get('/', tasksController.getAll)
 
 router.post('/', tasksController.create)
 
-router.patch('/:id', tasksController.update)
+router.put('/:id', tasksController.update)
 
 router.delete('/:id', tasksController.remove)
 
