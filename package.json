@@ -13,6 +13,7 @@
     "docker:down": "docker-compose down",
     "docker:stop": "docker-compose stop",
     "docker:up": "docker-compose up -d",
+    "heroku-postbuild": "babel src -d ./dist --copy-files",
     "prebuild": "yarn clear",
     "predocker:up": "mkdir -p .docker/data/{db,log}",
     "prestart": "yarn build",
