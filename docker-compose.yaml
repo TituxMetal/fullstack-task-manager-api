@@ -3,7 +3,7 @@ version: '3'
 services:
   db:
     container_name: mongo-task-manager
-    image: mongo:6.0.6
+    image: mongo:7.0.4
     user: '1000:1000'
     command: ['--logpath', '/var/log/mongodb/mongod.log']
     env_file:
